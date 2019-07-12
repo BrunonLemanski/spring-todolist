@@ -1,5 +1,7 @@
 package pl.retrilx.todolist.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -11,10 +13,10 @@ public class ProjectTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(updatable = false)
+    @Column(updatable = false, unique = true)
     private String projectSequence;
 
-    @NotBlank(message = "Proszę dołącz podsumowanie projektu")
+    @NotBlank(message = "Dołącz podsumowanie projektu")
     private String summary;
     private String acceptanceCriteria;
     private String status;
@@ -24,9 +26,13 @@ public class ProjectTask {
     private Date updated_At;
 
     @Column(updatable = false)
-    private String projectId;
+    private String projectIdentifier;
 
     //ManyToOne with Backlog
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
+    @JsonIgnore
+    private Backlog backlog;
 
     @PrePersist
     protected void onCreate(){
@@ -113,12 +119,20 @@ public class ProjectTask {
         this.updated_At = updated_At;
     }
 
-    public String getProjectId() {
-        return projectId;
+    public String getProjectIdentifier() {
+        return projectIdentifier;
     }
 
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
+    public void setProjectIdentifier(String projectIdentifier) {
+        this.projectIdentifier = projectIdentifier;
+    }
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
     }
 
     @Override
@@ -133,7 +147,8 @@ public class ProjectTask {
                 ", dueDate=" + dueDate +
                 ", created_At=" + created_At +
                 ", updated_At=" + updated_At +
-                ", projectId='" + projectId + '\'' +
+                ", projectIdentifier='" + projectIdentifier + '\'' +
+                ", backlog=" + backlog +
                 '}';
     }
 }

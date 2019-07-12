@@ -1,6 +1,7 @@
 package pl.retrilx.todolist.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -42,7 +43,7 @@ public class Project {
     //      CascadeType.ALL - jezeli usuniemy projekt to usunie sie wszystko co z nim zwiazane
     //      mappedBy - musi pasowac do zadeklarowanego obiektu w drugiej encji
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
-    //
+    @JsonIgnore //nie wczytuje wszystkich danych zwiazanych z projektem w momencie wywolania go z bazy
     private Backlog backlog;
 
     public Project() {
