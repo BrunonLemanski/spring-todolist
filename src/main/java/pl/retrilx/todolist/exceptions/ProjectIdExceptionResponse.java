@@ -8,11 +8,11 @@ public class ProjectIdExceptionResponse {
         this.projectId = projectId;
     }
 
-    public String getIdProject(){
+    public String getProjectId() {
         return projectId;
     }
 
-    public void setIdProject(String idProject) {
+    public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
 }

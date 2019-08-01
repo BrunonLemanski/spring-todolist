@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import pl.retrilx.todolist.repository.UserRepository;
 
 @RestController
 @ControllerAdvice
@@ -24,4 +25,12 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     {
         ProjectNotFoundExceptionResponse exceptionResponse = new ProjectNotFoundExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
-    }}
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleUserUsernameException(UserUsernameException ex, WebRequest request){
+
+        UserUsernameExceptionResponse exceptionResponse = new UserUsernameExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+}

@@ -12,6 +12,5 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
     @Override
     Iterable<Project> findAll();
 
-    @Override
-    void deleteById(Long aLong);
+    Iterable<Project> findAllByProjectLeader(String username);
 }

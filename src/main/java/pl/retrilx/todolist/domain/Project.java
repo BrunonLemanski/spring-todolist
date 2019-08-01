@@ -42,9 +42,19 @@ public class Project {
     // Entity relation!
     //      CascadeType.ALL - jezeli usuniemy projekt to usunie sie wszystko co z nim zwiazane
     //      mappedBy - musi pasowac do zadeklarowanego obiektu w drugiej encji
+
+    //OneToOne with Backlog
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
     @JsonIgnore //nie wczytuje wszystkich danych zwiazanych z projektem w momencie wywolania go z bazy
     private Backlog backlog;
+
+    //ManyToOne with User
+    //@JoinColumn(name = "user_id", updatable = false, nullable = false)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    private String projectLeader;
 
     public Project() {
     }
@@ -119,6 +129,22 @@ public class Project {
 
     public void setBacklog(Backlog backlog) {
         this.backlog = backlog;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getProjectLeader() {
+        return projectLeader;
+    }
+
+    public void setProjectLeader(String projectLeader) {
+        this.projectLeader = projectLeader;
     }
 
     @PrePersist

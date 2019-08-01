@@ -1,5 +1,6 @@
 package pl.retrilx.todolist.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -22,7 +23,12 @@ public class ProjectTask {
     private String status;
     private Integer priority;
     private Date dueDate;
+
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    @Column(updatable = false)
     private Date created_At;
+
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updated_At;
 
     @Column(updatable = false)
