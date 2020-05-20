@@ -1,6 +1,14 @@
 # Todo List Application
 
-Application for managing your projects. With it you can in easy way design specific stages of the projects.
+Application for managing your projects. With it you can in easy way design specific stages of the projects. App uses Spring Boot, React.js and Redux.
+
+## Functional Requirement Specification
+1. Adding and storing collection of projects.
+2. Editing and deleting projects.
+3. Adding and storing tasks of specific projects.
+4. Setting status and priority for tasks.
+5. Editing and removing task.
+6. Login and register page.
 
 Link: https://todo-list-app-retrilx.herokuapp.com/
 
